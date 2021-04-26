@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Bespoked Bikes!</h1>
+
+    <a asp-controller="Salespersons" asp-action="Index">
+        <input type="button" class="btn btn-primary" value="Display Salespersons" />
+    </a>
+
+    <a asp-controller="Products" asp-action="Index">
+        <input type="button" class="btn btn-primary" value="Display Products" />
+    </a>
+
+    <a asp-controller="Customers" asp-action="Index">
+        <input type="button" class="btn btn-primary" value="Display Customers" />
+    </a>
+
+    <a asp-controller="Discount" asp-action="Index">
+        <input type="button" class="btn btn-primary" value="Display Discounts" />
+    </a>
+
+    <a asp-controller="Sales" asp-action="Index">
+        <input type="button" class="btn btn-primary" value="Display Sales" />
+    </a>
+
+    <a asp-controller="Sales" asp-action="Create">
+        <input type="button" class="btn btn-primary" value="Create a Sale" />
+    </a>
+
+    <form asp-controller="Report" asp-action="Index">
+        <label for="quarter">Quarter</label>
+        <input type="number" id="quarter" name="quarter" required />
+        <label for="year">Year</label>
+        <input type="number" id="year" name="year" required />
+        <input type="submit" class="btn btn-primary"  value="See Commission Reports For Quarter And Year" />
+    </form>
+
+</div>

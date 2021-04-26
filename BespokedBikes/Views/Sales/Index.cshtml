@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BespokedBikes.Models.Sale>
+@inject BespokedBikes.Services.BespokedBikeService _bespokedBikesService
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salesperson)
+            </th>
+            <th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.SalesDate), "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesPrice)
+            </th>
+            <th>
+                Salesperson Comission
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @_bespokedBikesService.GetFullName(item.Customer)
+                </td>
+                <td>
+                    @_bespokedBikesService.GetFullName(item.Salesperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesPrice)
+                </td>
+                <td>
+                    @_bespokedBikesService.GetSalesPriceAfterDiscount(item)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
