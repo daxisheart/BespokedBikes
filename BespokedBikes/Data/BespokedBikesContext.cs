@@ -25,8 +25,6 @@ namespace BespokedBikes.Data
             {
                 entity.ToTable("Sale");
 
-                entity.Property(e => e.SaleId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.CustomerId)
@@ -39,6 +37,7 @@ namespace BespokedBikes.Data
             });
             
         }
+
     }
 
 }

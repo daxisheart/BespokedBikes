@@ -126,11 +126,9 @@ namespace BespokedBikes.Services
                 }
                 Report r = new Report()
                 {
-                    Quarter = quarter,
-                    Year = year,
                     SalesCommission = comission,
                     NumProductsSold = numSold,
-                    SalespersonName = GetFullName(salesperson)
+                    SalespersonName = GetFullName(salesperson),
                 };
                 report.Add(r);
             }
@@ -138,5 +136,6 @@ namespace BespokedBikes.Services
 
             return report;
         }
+
     }
 }

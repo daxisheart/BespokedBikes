@@ -16,13 +16,17 @@ namespace BespokedBikes.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<BespokedBikesContext>>()))
             {
-                context.Database.EnsureCreated();
-
-                // Look for any movies.
-                if (context.Product.Any() || context.Customer.Any() || context.Discount.Any() || context.Salesperson.Any() || context.Sale.Any())
+                //context.Database.EnsureCreated();
+                bool hasProduct = context.Product.Any();
+                bool hasCustomer = context.Customer.Any();
+                bool hasDiscount = context.Discount.Any();
+                bool hasSalespersom = context.Salesperson.Any();
+                bool hasSale = context.Sale.Any();
+                if ( hasProduct || hasCustomer || hasDiscount || hasSalespersom || hasSale)
                 {
                     return;   // DB has been seeded
                 }
+
 
                 List<Product> products = new List<Product>();
                 List<Customer> customers = new List<Customer>();
@@ -35,9 +39,9 @@ namespace BespokedBikes.Models
                     products.Add(new Product()
                     {
                         //ProductId = i,
-                        Name = "Book" + i.ToString(),
+                        Name = "Bike" + i.ToString(),
                         Style = "New" + i.ToString(),
-                        Manufacturer = "BookMakers" + i.ToString(),
+                        Manufacturer = "BikeMakers" + i.ToString(),
                         PurchasePrice = 20 + i,
                         Quantity = 5 + i,
                         SalePrice = 25 + i,
@@ -65,9 +69,9 @@ namespace BespokedBikes.Models
                 context.Customer.AddRange(customers.ToArray());
                 context.SaveChanges();
 
-
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                 {
+                    List<int> prodID = context.Product.Select(x => x.ProductId).ToList();
                     discounts.Add(new Discount()
                     {
                         //DiscountId = i,
@@ -75,12 +79,12 @@ namespace BespokedBikes.Models
                         BeginDate = DateTime.Parse("2000-2-12").AddMonths(i),
                         EndDate = DateTime.Parse("2000-2-12").AddMonths(i + 3),
                         //Product = products[i],
-                        ProductId = products[i].ProductId
-                    });
+                        ProductId = prodID[i % prodID.Count]
+                    });;
                 }
+
                 context.Discount.AddRange(discounts.ToArray());
                 context.SaveChanges();
-
 
 
                 for (int i = 0; i < 4; i++)
@@ -104,30 +108,52 @@ namespace BespokedBikes.Models
 
                 for (int i = 0; i < 12; i++)
                 {
+                    List<int> prodID = context.Product.Select(x => x.ProductId).ToList();
+                    List<int> custID = context.Customer.Select(x => x.CustomerId).ToList();
+                    List<int> salespID = context.Salesperson.Select(x => x.SalespersonId).ToList();
+
                     Sale sale = new Sale()
                     {
                         //SaleId = i,
                         //Salesperson = salespersons[i % salespersons.Count],
-                        SalespersonId = salespersons[i % salespersons.Count].SalespersonId,
-                        CustomerId = customers[i % customers.Count].CustomerId,
+                        SalespersonId = salespID[i % salespID.Count],
+                        CustomerId = custID[i % custID.Count],
                         //Customer = customers[i % customers.Count],
                         //Product = products[i % products.Count],
-                        ProductId = products[i % products.Count].ProductId,
+                        ProductId = prodID[i % prodID.Count],
                         SalesPrice = i * 50,
                         SalesDate = DateTime.Parse("2000-2-12").AddMonths(i)
                     };
                     sales.Add(sale);
 
 
-                    salespersons[i % salespersons.Count].Sales.Add(sale);
-                    customers[i % customers.Count].Sales.Add(sale);
+                    //salespersons[i % salespersons.Count].Sales.Add(sale);
+                    //customers[i % customers.Count].Sales.Add(sale);
                 }
 
 
-
                 context.Sale.AddRange(sales.ToArray());
-
                 context.SaveChanges();
+
+
+                discounts = context.Discount.ToList();
+                foreach (Discount d in discounts)
+                {
+                    d.Product = context.Product.Where(x => x.ProductId == d.ProductId).First();
+                }
+                context.Discount.UpdateRange(discounts);
+                context.SaveChanges();
+
+                sales = context.Sale.ToList();
+                foreach (Sale s in sales)
+                {
+                    s.Product = context.Product.Where(x => x.ProductId == s.ProductId).First();
+                    s.Salesperson = context.Salesperson.Where(x => x.SalespersonId == s.SalespersonId).First();
+                    s.Customer = context.Customer.Where(x => x.CustomerId == s.CustomerId).First();
+                }
+                context.Sale.UpdateRange(sales);
+                context.SaveChanges();
+
             }
         }
     }

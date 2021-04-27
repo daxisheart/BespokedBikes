@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<BespokedBikes.Models.Report>
+@inject BespokedBikes.Services.BespokedBikeService _bespokedBikesService
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Comissions report for @ViewBag.StartDate to @ViewBag.EndDate</h1>
 
 <table class="table">
     <thead>
@@ -13,10 +14,7 @@
                 @Html.DisplayNameFor(model => model.SalespersonName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quarter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.DisplayNameFor(model => model.NumProductsSold)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SalesCommission)
@@ -25,22 +23,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.SalespersonName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Quarter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
+                @Html.DisplayFor(modelItem => item.NumProductsSold)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SalesCommission)
             </td>
 
         </tr>
-}
+        }
     </tbody>
 </table>

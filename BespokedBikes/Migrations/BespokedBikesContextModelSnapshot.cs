@@ -117,6 +117,9 @@ namespace BespokedBikes.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NumProductsSold")
                         .HasColumnType("int");
 
@@ -132,6 +135,9 @@ namespace BespokedBikes.Migrations
                     b.Property<string>("SalespersonName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
@@ -143,7 +149,9 @@ namespace BespokedBikes.Migrations
             modelBuilder.Entity("BespokedBikes.Models.Sale", b =>
                 {
                     b.Property<int>("SaleId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");

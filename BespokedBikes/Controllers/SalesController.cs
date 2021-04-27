@@ -35,7 +35,7 @@ namespace BespokedBikes.Controllers
                     bespokedBikesContext.OrderByDescending(s => s.SalesDate);
                     break;
                 case "Date":
-                    bespokedBikesContext.OrderBy(s => s);
+                    bespokedBikesContext.OrderBy(s => s.SalesDate);
                     break;
                 default:
                     break;
@@ -43,7 +43,7 @@ namespace BespokedBikes.Controllers
 
 
 
-            ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.DateSortParam = sortOrder == "Date" ? "Date" : "date_desc";
             return View(await bespokedBikesContext.ToListAsync());
         }
         public async Task<IActionResult> Index2()

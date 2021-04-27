@@ -13,25 +13,22 @@ namespace BespokedBikes.Controllers
 {
     public class ReportsController : Controller
     {
-        private readonly BespokedBikesContext _context;
         private readonly BespokedBikeService _bespokedBikeService;
 
-        public ReportsController(BespokedBikesContext context, BespokedBikes.Services.BespokedBikeService service)
+        public ReportsController(BespokedBikesContext context, BespokedBikeService service)
         {
             _bespokedBikeService = service;
-            _context = context;
         }
 
         // GET: Reports
         public async Task<IActionResult> Index(int quarter, int year)
         {
+
+            ViewBag.Quarter = quarter;
+            ViewBag.Year = year;
+
             return View( "Index",_bespokedBikeService.CreateReport(quarter, year));
         }
 
-
-        private bool ReportExists(int id)
-        {
-            return _context.Report.Any(e => e.ReportId == id);
-        }
     }
 }

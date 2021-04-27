@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.SalespersonId)
             </th>
             <th>
-                @Html.ActionLink(Html.DisplayNameFor(model => model.SalesDate), "Index", new { sortOrder = ViewBag.DateSortParm })
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.SalesDate)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SalesPrice)
