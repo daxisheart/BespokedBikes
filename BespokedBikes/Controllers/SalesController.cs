@@ -26,8 +26,7 @@ namespace BespokedBikes.Controllers
         public async Task<IActionResult> Index(string sortOrder)
         {
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "date_desc";
-            //var bespokedBikesContext = _context.Sale.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Salesperson);
-            var bespokedBikesContext = _context.Sale;
+            var bespokedBikesContext = _context.Sale.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Salesperson);
 
             switch (sortOrder)
             {
@@ -42,9 +41,8 @@ namespace BespokedBikes.Controllers
             }
 
 
-
             ViewBag.DateSortParam = sortOrder == "Date" ? "Date" : "date_desc";
-            return View(await bespokedBikesContext.ToListAsync());
+            return View(await bespokedBikesContext.AsNoTracking().ToListAsync());
         }
         public async Task<IActionResult> Index2()
         {

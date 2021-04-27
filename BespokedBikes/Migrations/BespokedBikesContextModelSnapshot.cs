@@ -123,9 +123,6 @@ namespace BespokedBikes.Migrations
                     b.Property<int>("NumProductsSold")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quarter")
-                        .HasColumnType("int");
-
                     b.Property<double>("SalesCommission")
                         .HasColumnType("float");
 
@@ -137,9 +134,6 @@ namespace BespokedBikes.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
 
                     b.HasKey("ReportId");
 

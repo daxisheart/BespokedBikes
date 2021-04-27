@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Sales</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => model.ProductId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                @Html.DisplayNameFor(model => model.Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SalespersonId)
+                @Html.DisplayNameFor(model => model.Salesperson)
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.SalesDate)</a>
@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
+                    @Html.DisplayFor(modelItem => item.ProductId)
                 </td>
                 <td>
                     @_bespokedBikesService.GetFullName(item.Customer)

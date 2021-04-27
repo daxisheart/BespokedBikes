@@ -51,8 +51,8 @@ namespace BespokedBikes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SalespersonId = table.Column<int>(type: "int", nullable: false),
                     SalespersonName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quarter = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NumProductsSold = table.Column<int>(type: "int", nullable: false),
                     SalesCommission = table.Column<double>(type: "float", nullable: false)
                 },
@@ -106,7 +106,8 @@ namespace BespokedBikes.Migrations
                 name: "Sale",
                 columns: table => new
                 {
-                    SaleId = table.Column<int>(type: "int", nullable: false),
+                    SaleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     SalespersonId = table.Column<int>(type: "int", nullable: false),

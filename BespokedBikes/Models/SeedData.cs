@@ -16,7 +16,7 @@ namespace BespokedBikes.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<BespokedBikesContext>>()))
             {
-                //context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
                 bool hasProduct = context.Product.Any();
                 bool hasCustomer = context.Customer.Any();
                 bool hasDiscount = context.Discount.Any();
@@ -60,7 +60,7 @@ namespace BespokedBikes.Models
                         Address = "House" + i.ToString(),
                         FirstName = "Jack" + i.ToString(),
                         LastName = "NoLastNAme" + i.ToString(),
-                        PhoneNumber = 2000000000 + i,
+                        PhoneNumber = 200000000 + i,
                         StartDate = DateTime.Parse("2000-2-12").AddMonths(i),
                         Sales = new List<Sale>()
                     });

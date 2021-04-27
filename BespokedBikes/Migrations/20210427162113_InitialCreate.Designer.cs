@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BespokedBikes.Migrations
 {
     [DbContext(typeof(BespokedBikesContext))]
-    [Migration("20210427015550_InitialCreate")]
+    [Migration("20210427162113_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,10 +119,10 @@ namespace BespokedBikes.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("NumProductsSold")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Quarter")
+                    b.Property<int>("NumProductsSold")
                         .HasColumnType("int");
 
                     b.Property<double>("SalesCommission")
@@ -134,8 +134,8 @@ namespace BespokedBikes.Migrations
                     b.Property<string>("SalespersonName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ReportId");
 
@@ -145,7 +145,9 @@ namespace BespokedBikes.Migrations
             modelBuilder.Entity("BespokedBikes.Models.Sale", b =>
                 {
                     b.Property<int>("SaleId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");

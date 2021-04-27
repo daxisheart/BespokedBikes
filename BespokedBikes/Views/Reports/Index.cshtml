@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<BespokedBikes.Models.Report>
-@inject BespokedBikes.Services.BespokedBikeService _bespokedBikesService
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Comissions report for @ViewBag.StartDate to @ViewBag.EndDate</h1>
+<h1>Comissions report for quarter @ViewBag.Quarter of year @ViewBag.Year</h1>
 
 <table class="table">
     <thead>
