@@ -27,7 +27,7 @@ namespace BespokedBikes.Controllers
         {
 
             //create new report
-            return View(_bespokedBikeService.CreateReport(quarter, year));
+            return View( "Index",_bespokedBikeService.CreateReport(quarter, year));
             //return View(await _context.Report.ToListAsync());
         }
 

@@ -34,7 +34,7 @@ namespace BespokedBikes.Models
                 {
                     products.Add(new Product()
                     {
-                        ProductId = i,
+                        //ProductId = i,
                         Name = "Book" + i.ToString(),
                         Style = "New" + i.ToString(),
                         Manufacturer = "BookMakers" + i.ToString(),
@@ -45,11 +45,14 @@ namespace BespokedBikes.Models
                     });
                 }
 
+                context.Product.AddRange(products.ToArray());
+                context.SaveChanges();
+
                 for (int i = 0; i < 10; i++)
                 {
                     customers.Add(new Customer()
                     {
-                        CustomerId = i,
+                        //CustomerId = i,
                         Address = "House" + i.ToString(),
                         FirstName = "Jack" + i.ToString(),
                         LastName = "NoLastNAme" + i.ToString(),
@@ -59,24 +62,32 @@ namespace BespokedBikes.Models
                     });
                 }
 
+                context.Customer.AddRange(customers.ToArray());
+                context.SaveChanges();
+
+
                 for (int i = 0; i < 3; i++)
                 {
                     discounts.Add(new Discount()
                     {
-                        DiscountId = i,
+                        //DiscountId = i,
                         DiscountPercentage = 10 + i*5,
                         BeginDate = DateTime.Parse("2000-2-12").AddMonths(i),
                         EndDate = DateTime.Parse("2000-2-12").AddMonths(i + 3),
-                        Product = products[i],
+                        //Product = products[i],
                         ProductId = products[i].ProductId
                     });
                 }
+                context.Discount.AddRange(discounts.ToArray());
+                context.SaveChanges();
+
+
 
                 for (int i = 0; i < 4; i++)
                 {
                     salespersons.Add(new Salesperson()
                     {
-                        SalespersonId = i,
+                        //SalespersonId = i,
                         Address = "Book" + i.ToString(),
                         FirstName = "Normal" + i.ToString(),
                         LastName = "LastNameDude" + i.ToString(),
@@ -87,30 +98,33 @@ namespace BespokedBikes.Models
                     });
                 }
 
+                context.Salesperson.AddRange(salespersons.ToArray());
+                context.SaveChanges();
+
+
                 for (int i = 0; i < 12; i++)
                 {
                     Sale sale = new Sale()
                     {
-                        SaleId = i,
-                        Salesperson = salespersons[i % salespersons.Count],
+                        //SaleId = i,
+                        //Salesperson = salespersons[i % salespersons.Count],
                         SalespersonId = salespersons[i % salespersons.Count].SalespersonId,
                         CustomerId = customers[i % customers.Count].CustomerId,
-                        Customer = customers[i % customers.Count],
-                        Product = products[i % products.Count],
+                        //Customer = customers[i % customers.Count],
+                        //Product = products[i % products.Count],
                         ProductId = products[i % products.Count].ProductId,
                         SalesPrice = i * 50,
                         SalesDate = DateTime.Parse("2000-2-12").AddMonths(i)
                     };
                     sales.Add(sale);
+
+
                     salespersons[i % salespersons.Count].Sales.Add(sale);
-                    customers[i % customers.Count].Sales.Add(sale);
                     customers[i % customers.Count].Sales.Add(sale);
                 }
 
-                context.Product.AddRange(products.ToArray());
-                context.Customer.AddRange(customers.ToArray());
-                context.Discount.AddRange(discounts.ToArray());
-                context.Salesperson.AddRange(salespersons.ToArray());
+
+
                 context.Sale.AddRange(sales.ToArray());
 
                 context.SaveChanges();

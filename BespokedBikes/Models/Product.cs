@@ -17,7 +17,6 @@ namespace BespokedBikes.Models
         [Required]
         public string Manufacturer { get; set; }
         
-        [Required]
         public string Style { get; set; }
 
         [Display(Name = "Purchase Price")]

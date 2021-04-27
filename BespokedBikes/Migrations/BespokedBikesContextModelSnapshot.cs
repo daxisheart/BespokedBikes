@@ -27,6 +27,7 @@ namespace BespokedBikes.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -37,9 +38,8 @@ namespace BespokedBikes.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("PhoneNumber")
+                        .HasColumnType("real");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -59,8 +59,8 @@ namespace BespokedBikes.Migrations
                     b.Property<DateTime>("BeginDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DiscountPercentage")
-                        .HasColumnType("int");
+                    b.Property<float>("DiscountPercentage")
+                        .HasColumnType("real");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -82,27 +82,25 @@ namespace BespokedBikes.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("ComissionPercentage")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("ComissionPercentage")
+                        .HasColumnType("real");
 
                     b.Property<string>("Manufacturer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("PurchasePrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("PurchasePrice")
+                        .HasColumnType("real");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SalePrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SalespersonFullName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("SalePrice")
+                        .HasColumnType("real");
 
                     b.Property<string>("Style")
                         .HasColumnType("nvarchar(max)");
@@ -125,8 +123,8 @@ namespace BespokedBikes.Migrations
                     b.Property<int>("Quarter")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SalesCommissionAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SalesCommission")
+                        .HasColumnType("float");
 
                     b.Property<int>("SalespersonId")
                         .HasColumnType("int");
@@ -145,9 +143,7 @@ namespace BespokedBikes.Migrations
             modelBuilder.Entity("BespokedBikes.Models.Sale", b =>
                 {
                     b.Property<int>("SaleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -158,8 +154,8 @@ namespace BespokedBikes.Migrations
                     b.Property<DateTime>("SalesDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("SalesPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("SalesPrice")
+                        .HasColumnType("real");
 
                     b.Property<int>("SalespersonId")
                         .HasColumnType("int");
@@ -196,8 +192,8 @@ namespace BespokedBikes.Migrations
                     b.Property<string>("Manager")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("PhoneNumber")
+                        .HasColumnType("real");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

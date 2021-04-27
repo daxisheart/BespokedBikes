@@ -21,7 +21,7 @@ namespace BespokedBikes.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Customer>(entity =>
+/*            modelBuilder.Entity<Customer>(entity =>
             {
                 entity.ToTable("Customer");
 
@@ -47,7 +47,7 @@ namespace BespokedBikes.Data
                 entity.ToTable("Salesperson");
 
                 entity.Property(e => e.SalespersonId).ValueGeneratedNever();
-            });
+            });*/
 
             modelBuilder.Entity<Sale>(entity =>
             {
@@ -55,16 +55,17 @@ namespace BespokedBikes.Data
 
                 entity.Property(e => e.SaleId).ValueGeneratedNever();
 
-/*                entity.HasOne(d => d.Customer)
+                entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Sales)
-                    .HasForeignKey(d => d.CustomerId);
+                    .HasForeignKey(d => d.CustomerId)
+                ;
 
                 entity.HasOne(d => d.Salesperson)
                     .WithMany(p => p.Sales)
-                    .HasForeignKey(d => d.SalespersonId);
-*/            });
+                    .HasForeignKey(d => d.SalespersonId)
+                    ;
+            });
             
-            OnModelCreating(modelBuilder);
         }
     }
 

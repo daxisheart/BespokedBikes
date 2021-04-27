@@ -20,7 +20,6 @@ namespace BespokedBikes.Models
         public string LastName { get; set; }
         public string Address { get; set; }
 
-        [Required]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public float PhoneNumber { get; set; }
@@ -32,7 +31,6 @@ namespace BespokedBikes.Models
         [Display(Name = "Termination Date")]
         public DateTime? TerminationDate { get; set; }
 
-        [Required]
         public string Manager { get; set; }
 
         public ICollection<Sale> Sales { get; set; }

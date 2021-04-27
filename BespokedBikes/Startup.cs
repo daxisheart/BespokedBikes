@@ -16,9 +16,6 @@ namespace BespokedBikes
 {
     public class Startup
     {
-        private static string ConnectionString = "Server=tcp:solomon-profisee-app.database.windows.net,1433;Initial Catalog=BeSpokedBikesDB;Persist Security Info=False;" +
-    "User ID=solomon;Password=Pr0f!s33;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,8 +29,8 @@ namespace BespokedBikes
             services.AddControllersWithViews();
 
             services.AddDbContext<BespokedBikesContext>(options =>
-        options.UseSqlServer("Server=tcp:BespokedBike.database.windows.net,1433;Database=BikesDB;User ID=gaiaflare;Password=Pentras2;Encrypt=true;Connection Timeout=30"));
-                //options.UseSqlServer(Configuration.GetConnectionString("BespokedBikesContext")));
+        //options.UseSqlServer("Server=tcp:BespokedBike.database.windows.net,1433;Database=BikesDB;User ID=gaiaflare;Password=Pentras2;Encrypt=true;Connection Timeout=30"));
+                options.UseSqlServer(Configuration.GetConnectionString("BespokedBikesContext")));
             services.AddScoped<BespokedBikeService>();
 
         }

@@ -23,9 +23,12 @@ namespace BespokedBikes.Controllers
         }
 
         // GET: Sales
-        public async Task<IActionResult> Index2(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var bespokedBikesContext = _context.Sale.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Salesperson);
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "date_desc";
+            //var bespokedBikesContext = _context.Sale.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Salesperson);
+            var bespokedBikesContext = _context.Sale;
+
             switch (sortOrder)
             {
                 case "date_desc":
@@ -43,7 +46,7 @@ namespace BespokedBikes.Controllers
             ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc" : "Date";
             return View(await bespokedBikesContext.ToListAsync());
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index2()
         {
             var bespokedBikesContext = _context.Sale.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Salesperson);
             return View(await bespokedBikesContext.ToListAsync());
@@ -55,9 +58,9 @@ namespace BespokedBikes.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Set<Customer>(), "Id", "Id");
             ViewData["ProductId"] = new SelectList(_context.Set<Product>(), "Id", "Id");
             ViewData["SalespersonId"] = new SelectList(_context.Salesperson, "Id", "Id"); 
-            ViewBag.CustomerId = _context.Customer.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
-            ViewBag.ProductId = _context.Product.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }); ;
-            ViewBag.SalespersonId = _context.Salesperson.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            ViewBag.CustomerId = _context.Customer.Select(x => new SelectListItem { Text = x.FirstName.ToString() + " " + x.LastName, Value = x.CustomerId.ToString() });
+            ViewBag.ProductId = _context.Product.Select(x => new SelectListItem { Text = x.Name.ToString(), Value = x.ProductId.ToString() }); ;
+            ViewBag.SalespersonId = _context.Salesperson.Select(x => new SelectListItem { Text = x.FirstName.ToString() + " " + x.LastName, Value = x.SalespersonId.ToString() });
             return View("Create");
         }
 
@@ -71,7 +74,7 @@ namespace BespokedBikes.Controllers
             {
                 //Todo
                 sale.SalesPrice =  _bespokedBikesService.GetSalesPriceAfterDiscount(sale);
-                _context.Add(sale);
+                _context.Sale.Add(sale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

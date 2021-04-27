@@ -8,6 +8,10 @@ namespace BespokedBikes.Models
 {
     public class Report
     {
+
+        public Report()
+        {
+        }
         [Key]
         public int ReportId { get; set; }
 

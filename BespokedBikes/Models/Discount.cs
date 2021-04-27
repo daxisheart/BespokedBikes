@@ -28,7 +28,6 @@ namespace BespokedBikes.Models
         public float DiscountPercentage { get; set; }
 
         [ForeignKey("Product")]
-        [Required]
         public int ProductId { get; set; }
         public Product Product { get; set; }
     }
