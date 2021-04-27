@@ -25,10 +25,7 @@ namespace BespokedBikes.Controllers
         // GET: Reports
         public async Task<IActionResult> Index(int quarter, int year)
         {
-
-            //create new report
             return View( "Index",_bespokedBikeService.CreateReport(quarter, year));
-            //return View(await _context.Report.ToListAsync());
         }
 
 

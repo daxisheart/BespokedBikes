@@ -21,34 +21,6 @@ namespace BespokedBikes.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-/*            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.ToTable("Customer");
-
-                entity.Property(e => e.CustomerId).ValueGeneratedNever();
-
-            });
-            modelBuilder.Entity<Product>(entity =>
-            {
-                entity.ToTable("Product");
-
-                entity.Property(e => e.ProductId).ValueGeneratedNever();
-
-            });
-            modelBuilder.Entity<Discount>(entity =>
-            {
-                entity.ToTable("Discount");
-
-                entity.Property(e => e.DiscountId).ValueGeneratedNever();
-
-            });
-            modelBuilder.Entity<Salesperson>(entity =>
-            {
-                entity.ToTable("Salesperson");
-
-                entity.Property(e => e.SalespersonId).ValueGeneratedNever();
-            });*/
-
             modelBuilder.Entity<Sale>(entity =>
             {
                 entity.ToTable("Sale");
